@@ -1,2 +1,2 @@
-# Gibberish
+# gibberish
 Shell implemented in C
