@@ -12,15 +12,37 @@
 
 void getcommand(char* command)
 {
-    char args[MAX];
-    strcpy(args,command);
-    char* token = strtok(args, " \t");
-    if(strcmp(token,"pwd") == 0){ pwdcmd(); }
-    else if(strcmp(token,"echo") == 0) {echocmd(command);}
-    else if(strcmp(token,"cd") == 0) {cdcmd(command);}
-    else if(strcmp(token,"repeat") == 0){ repeatcmd(command);}
-    else if(strcmp(token,"ls") == 0){ lscmd(command);}
-    else { printf("Error: command not found\n"); }
+    if(strchr(command,';'))
+    {
+        char allcomms[MAX][MAX];
+        int i = 0;
+        char* splitcom = strtok(command, ";\n");
+        while (splitcom != NULL) // prints every token
+        {
+            // printf("%s\n", splitcom);
+            // getcommand(splitcom);
+            strcpy(allcomms[i],splitcom);
+            splitcom = strtok(NULL, ";");
+            i++;
+        }
+        for(int j = 0; j < i; j++)
+        {
+            getcommand(allcomms[j]);
+        }
+    }
+    else
+    {
+        char args[MAX];
+        strcpy(args,command);
+        char* token = strtok(args, " \t");
+        if(strcmp(token,"pwd") == 0){ pwdcmd(); }
+        else if(strcmp(token,"echo") == 0) {echocmd(command);}
+        else if(strcmp(token,"cd") == 0) {cdcmd(command);}
+        else if(strcmp(token,"repeat") == 0){ repeatcmd(command);}
+        else if(strcmp(token,"ls") == 0){ lscmd(command);}
+        else { printf("Error: command not found\n"); }
+    }
+    
 }
 
 int main(int argc, char* argv[])
@@ -31,7 +53,9 @@ int main(int argc, char* argv[])
     prompt();
     char command[MAX];
     
-    scanf("%[^\n]%*c",command);
+    int size;
+    scanf("%[^\n]%n%*c",command,&size);
+    command[size] = '\0';
     // char *command = NULL;
     // size_t len = 0;
     // getline(&command, &len, stdin);
@@ -48,7 +72,8 @@ int main(int argc, char* argv[])
         if(strcmp(command,"\0") == 0)   //// STILL NEED TO FIX EMPTY COMMAND BUG - INFINITE LOOP  
         {
             prompt();
-            scanf("%[^\n]%*c",command);
+            scanf("%[^\n]%n%*c",command,&size);
+            command[size] = '\0';
         }
         else
         {
