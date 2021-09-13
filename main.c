@@ -19,8 +19,6 @@ void getcommand(char* command)
         char* splitcom = strtok(command, ";\n");
         while (splitcom != NULL) // prints every token
         {
-            // printf("%s\n", splitcom);
-            // getcommand(splitcom);
             strcpy(allcomms[i],splitcom);
             splitcom = strtok(NULL, ";");
             i++;

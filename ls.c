@@ -43,6 +43,7 @@ void lscmd(char* command) //ERROR WITH ls -l ..
 {
     int flagA = 0, flagL = 0, pathIndex = 0;
     char* token = strtok(command, " \t");
+    char temp[MAX];
     token = strtok(NULL, " \t");
     char pathArray[MAX][MAX];
     char curPath[MAX];
@@ -87,19 +88,23 @@ void lscmd(char* command) //ERROR WITH ls -l ..
         if(pathIndex > 1){printf("%s:\n",pathArray[i]);}
         if(flagL)
         {
-            int total = 0;
+            
+            long total = 0;
             DIR *dh = opendir(pathArray[i]);
             if (!dh){ perror("error"); }
             else
             {
-                while ((d = readdir(dh)) != NULL)
+                while ((d = readdir(dh)) != NULL) //append d_name to patharray and pass to stat
                 {
-                    stat(d->d_name, &buf);
+                    strcpy(temp,pathArray[i]);
+                    strcat(temp,"/");
+                    strcat(temp,d->d_name);
+                    stat(temp, &buf);
                     total += buf.st_blocks;
 
                 }
             }
-            printf("total %d\n",total/2);
+            printf("total %ld\n",total/2);
         }
         DIR *dh = opendir(pathArray[i]);
         if (!dh){ perror("error"); }
@@ -111,13 +116,17 @@ void lscmd(char* command) //ERROR WITH ls -l ..
                 if(flagL) 
                 {
                     char datetime[MAX];
-                    stat(d->d_name, &buf);
-                    fileperms(d->d_name);
+                    strcpy(temp,pathArray[i]);
+                    strcat(temp,"/");
+                    strcat(temp,d->d_name);
+                    stat(temp, &buf);
+                    stat(temp, &buf);
+                    fileperms(temp);
                     printf("%ld ",buf.st_nlink);
                     printf("%s ", getpwuid(buf.st_uid)->pw_name);
                     printf("%s ", getgrgid(buf.st_gid)->gr_name);
                     printf("%5.ld ", buf.st_size);
-                    strftime(datetime, 14, "%b %d %H:%M", localtime(&(buf.st_ctime)));
+                    strftime(datetime, 14, "%b %d %H:%M", localtime(&(buf.st_mtime)));
                     printf("%s ", datetime);
                 }
                 printf("%s  ", d->d_name);
