@@ -4,12 +4,48 @@
 #include "cd.c"
 #include "repeat.c"
 #include "ls.c"
+#include "pinfo.c"
 // #include "history.c"
 // typedef struct process
 // {
 //     int pid;
 //     char name[MAX_SIZE];
 // }process;
+
+
+void extcmd(char* command)
+{
+    char* token = strtok(command, " \t");
+    char* args[MAX] = {NULL};
+    char com[MAX];
+    strcpy(com,token);
+    int i = 0;
+    while(token != NULL)
+    {   
+        args[i] = malloc(MAX);
+        strcpy(args[i],token);
+        i++;
+        token = strtok(NULL, " \t");
+    }
+    int forkReturn = fork();
+    if(forkReturn < 0)
+    {
+        perror("fork failed");
+    }
+    else if(forkReturn == 0)
+    {
+        int q = execvp(com,args);
+        if(q == -1)
+        {
+            printf("error : command not found\n");
+        }
+    }
+    else
+    {
+        int r = 0;
+        waitpid(forkReturn,&r,WUNTRACED);
+    }
+}
 
 void getcommand(char* command)
 {
@@ -41,7 +77,8 @@ void getcommand(char* command)
         else if(strcmp(token,"cd") == 0) {cdcmd(command);}
         else if(strcmp(token,"repeat") == 0){ repeatcmd(command);}
         else if(strcmp(token,"ls") == 0){ lscmd(command);}
-        else { printf("Error: command not found\n"); }
+        else if(strcmp(token,"pinfo") == 0){ pinfocmd(command);}
+        else { extcmd(command); }
     }
     
 }
@@ -63,9 +100,9 @@ int main(int argc, char* argv[])
         // printf("command: %s\n",command);
         if(strcmp(command,"\0") == 0)   //// STILL NEED TO FIX EMPTY COMMAND BUG - INFINITE LOOP  
         {
-            prompt();
-            scanf("%[^\n]%*c",command);
-            command[size] = '\0';
+            // prompt();
+            // scanf("%[^\n]%*c",command);
+            // command[size] = '\0';
         }
         else if(strcmp(command,"exit") == 0)
         {
@@ -75,10 +112,7 @@ int main(int argc, char* argv[])
         }
         else
         {
-            // printf("command:%s\n",command);
             getcommand(command);
-            
-            // scanf("%[^\n]%*c",command);
         }
     }
 }
