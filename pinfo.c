@@ -14,12 +14,10 @@ void pinfocmd(char* command)
     {
         strcpy(curpid,token);
     }
-    // printf("%s\n",curpid);
     strcat(procstat,curpid);
     char copyprocstat[MAX];
     strcpy(copyprocstat,procstat);
     strcat(procstat,"/stat");
-    // printf("%s\n",procstat);
     char buffer[MAX];
     char buffer2[MAX];
     int fd = open(procstat, O_RDONLY);
