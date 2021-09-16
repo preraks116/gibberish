@@ -4,6 +4,7 @@
 #include "cd.c"
 #include "repeat.c"
 #include "ls.c"
+// #include "history.c"
 // typedef struct process
 // {
 //     int pid;
@@ -32,6 +33,8 @@ void getcommand(char* command)
     {
         char args[MAX];
         strcpy(args,command);
+        // write(fd, args, strlen(args));
+        // write(fd,"\n",1);
         char* token = strtok(args, " \t");
         if(strcmp(token,"pwd") == 0){ pwdcmd(); }
         else if(strcmp(token,"echo") == 0) {echocmd(command);}
@@ -46,39 +49,36 @@ void getcommand(char* command)
 int main(int argc, char* argv[])
 {
     getcwd(home,MAX);
-    // strcpy(home,"/home");
-    // strcpy(home,"/mnt/e");
-    prompt();
     char command[MAX];
-    
+    // fd = open("history.txt", O_CREAT | O_RDWR | O_TRUNC, 0600);
     int size;
-    scanf("%[^\n]%n%*c",command,&size);
-    command[size] = '\0';
-    // char *command = NULL;
-    // size_t len = 0;
-    // getline(&command, &len, stdin);
-    // command[strlen(s)-1] = '\0';
-    // printf("%s\n",command);
-
     // char* command;
     // size_t len;
     // getline(&command, &len, stdin);
     
-    while(strcmp(command,"exit") != 0)
+    while(1)
     {
+        prompt();
+        scanf("%[^\n]%*c",command);
         // printf("command: %s\n",command);
         if(strcmp(command,"\0") == 0)   //// STILL NEED TO FIX EMPTY COMMAND BUG - INFINITE LOOP  
         {
             prompt();
-            scanf("%[^\n]%n%*c",command,&size);
+            scanf("%[^\n]%*c",command);
             command[size] = '\0';
+        }
+        else if(strcmp(command,"exit") == 0)
+        {
+            // write(fd, "exit", 4);
+            // write(fd,"\n",1);
+            return 0;
         }
         else
         {
             // printf("command:%s\n",command);
             getcommand(command);
-            prompt();
-            scanf("%[^\n]%*c",command);
+            
+            // scanf("%[^\n]%*c",command);
         }
     }
 }

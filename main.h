@@ -19,7 +19,7 @@
 #define MAX (int)1e3+5
 char oldd[MAX];
 char home[MAX];
-
+int fd;
 void prompt();
 void pwdcmd();
 void echocmd(char* command);

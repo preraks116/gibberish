@@ -42,6 +42,4 @@ void cdcmd(char* command)
             }
         }
     }
-    
-    
 }
