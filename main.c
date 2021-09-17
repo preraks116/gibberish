@@ -54,6 +54,7 @@ int main(int argc, char* argv[])
 {
     getcwd(home,MAX);
     char command[MAX];
+    fd = open("history.txt", O_CREAT | O_RDWR | O_TRUNC, 0600);
     historyget();
     // fd = open("history.txt", O_CREAT | O_RDWR | O_TRUNC, 0600);
     int size;
