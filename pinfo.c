@@ -38,30 +38,14 @@ void pinfocmd(char* command)
         char status[MAX];
         strcpy(status,token);
         int y = atoi(curpid);
-        if(y == tcgetpgrp(0))
-        {
-            strcat(status,"+");
-        }
-        
+        if(y == tcgetpgrp(0)){strcat(status,"+");}
         printf("Process Status -- %s\n",status);
-        strcat(procstat,"m");
-        int fd2 = open(procstat,O_RDONLY);
-        if(fd2 == -1)
-        {
-            printf("error: pid %s not found\n",curpid);
-        }
-        else
-        {
-            read(fd, buffer2, MAX);
-            close(fd);
-            char* token2 = strtok(buffer2," \t");
-            printf("memory -- %s {Virtual Memory}\n",token2);
-        }
+        for(int i = 3; i < 23; i++){token = strtok(NULL, " ");}
+        printf("memory -- %s {Virtual Memory}\n",token);
         strcat(copyprocstat,"/exe");
         char buffer3[MAX];
         int x = readlink(copyprocstat,buffer3,MAX);
         buffer3[x] = '\0';
-        // printf("%s\n",buffer2);
         char tilde[] = "~";
         if(strstr(buffer3,home))
         {
