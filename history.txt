@@ -1,5 +1,1 @@
-echo hi
-repeat 2 echo hi
- echo hi 
- echo hi 
-exit
+ls  ;history  ;ls  ;ls  ;ls  ;history  ;ls  ;ls  ;ls  ;ls  ;ls  ;ls  ;ls  ;ls  ;ls  ;ls  ;history  ;exit ;history ;exit

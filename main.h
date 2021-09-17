@@ -17,6 +17,8 @@
 
 
 #define MAX (int)1e3+5
+
+char history[20][MAX];
 char oldd[MAX];
 char home[MAX];
 int fd;

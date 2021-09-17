@@ -2,6 +2,8 @@
 
 void extcmd(char* command)
 {
+    int bg = 0;
+    if(strchr(command,'&')){bg = 1;}
     char* token = strtok(command, " \t");
     char* args[MAX] = {NULL};
     char com[MAX];
@@ -10,7 +12,10 @@ void extcmd(char* command)
     while(token != NULL)
     {   
         args[i] = malloc(MAX);
-        strcpy(args[i],token);
+        if(strcmp(token,"&") != 0)
+        {
+            strcpy(args[i],token);
+        }
         i++;
         token = strtok(NULL, " \t");
     }
@@ -30,6 +35,10 @@ void extcmd(char* command)
     else
     {
         int r = 0;
-        waitpid(forkReturn,&r,WUNTRACED);
+        if(bg == 0)
+        {
+            waitpid(forkReturn,&r,WUNTRACED);
+        }
+        else{printf("%d\n",forkReturn);}
     }
 }

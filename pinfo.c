@@ -1,5 +1,6 @@
 #include "main.h"
 
+
 void pinfocmd(char* command)
 {
     char* token = strtok(command, " \t");
@@ -36,14 +37,12 @@ void pinfocmd(char* command)
         printf("pid -- %s\n",curpid);
         char status[MAX];
         strcpy(status,token);
-        /*
-        CHECKING FOR FOREGROUND PROCESS
-        
-        if(//condition)
+        int y = atoi(curpid);
+        if(y == tcgetpgrp(0))
         {
             strcat(status,"+");
         }
-        */
+        
         printf("Process Status -- %s\n",status);
         strcat(procstat,"m");
         int fd2 = open(procstat,O_RDONLY);

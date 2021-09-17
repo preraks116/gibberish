@@ -6,7 +6,7 @@
 #include "ls.c"
 #include "pinfo.c"
 #include "extcmd.c"
-// #include "history.c"
+#include "history.c"
 // typedef struct process
 // {
 //     int pid;
@@ -44,6 +44,7 @@ void getcommand(char* command)
         else if(strcmp(token,"repeat") == 0){ repeatcmd(command);}
         else if(strcmp(token,"ls") == 0){ lscmd(command);}
         else if(strcmp(token,"pinfo") == 0){ pinfocmd(command);}
+        else if(strcmp(token,"history") == 0){ historycmd(command);}
         else { extcmd(command); }
     }
     
@@ -53,6 +54,7 @@ int main(int argc, char* argv[])
 {
     getcwd(home,MAX);
     char command[MAX];
+    historyget();
     // fd = open("history.txt", O_CREAT | O_RDWR | O_TRUNC, 0600);
     int size;
     // char* command;
@@ -72,12 +74,13 @@ int main(int argc, char* argv[])
         }
         else if(strcmp(command,"exit") == 0)
         {
-            // write(fd, "exit", 4);
-            // write(fd,"\n",1);
+            historylog(command);
+            historysave();
             return 0;
         }
         else
         {
+            historylog(command);
             getcommand(command);
         }
     }
