@@ -61,7 +61,10 @@ void historycmd(char* command)
 
 void historysave()
 {
-    fd = open("history.txt", O_CREAT | O_RDWR | O_TRUNC, 0600);
+    char homePath[MAX];
+    strcpy(homePath,home);
+    strcat(homePath,"/history.txt");
+    fd = open(homePath, O_CREAT | O_RDWR | O_TRUNC, 0600);
     char buffer[MAX];
     for(int i = 0; i < historyIndex; i++)
     {

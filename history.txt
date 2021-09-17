@@ -1,1 +1,1 @@
-clear   ;clear   ;clear   ;clear   ;clear   ;clear   ;clear   ;clear   ;clear   ;clear   ;ls   ;ls   ;ls   ;ls   ;ls  ;ls  ;ls ;ls ;ls ;exit
+ls    ;ls    ;exit   ;ls   ;history   ;cd ..   ;ls   ;history   ;ls   ;cd gibberish   ;ls   ;ls   ;history   ;history 5   ;exit  ;history  ;exit ;ls ;l ;exit
