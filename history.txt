@@ -1,1 +1,1 @@
-history       ;exit      ;repeat 2 echo hi      ;history      ;exit     ;vi &     ;p 31     ;pinfo 31     ;pinfo 1    ;pinfo 1   ;pinfo   ;pinfo 1   ;pinfo  ;pinfo  ;pinfo 1  ;ls ;pinfo ;pinfo 1 ;ls ;ls -l
+clear   ;clear   ;clear   ;clear   ;clear   ;clear   ;clear   ;clear   ;clear   ;clear   ;ls   ;ls   ;ls   ;ls   ;ls  ;ls  ;ls ;ls ;ls ;exit

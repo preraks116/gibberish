@@ -68,5 +68,4 @@ void historysave()
         write(fd,history[i],strlen(history[i]));
         if(i != historyIndex - 1){write(fd," ;",2);}
     }
-    close(fd);
 }

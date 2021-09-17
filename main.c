@@ -39,6 +39,7 @@ void getcommand(char* command)
         // write(fd,"\n",1);
         char* token = strtok(args, " \t");
         if(strcmp(token,"pwd") == 0){ pwdcmd(); }
+        else if(strcmp(token,"exit") == 0) {exit(EXIT_SUCCESS);}
         else if(strcmp(token,"echo") == 0) {echocmd(command);}
         else if(strcmp(token,"cd") == 0) {cdcmd(command);}
         else if(strcmp(token,"repeat") == 0){ repeatcmd(command);}
@@ -54,35 +55,16 @@ int main(int argc, char* argv[])
 {
     getcwd(home,MAX);
     char command[MAX];
-    // fd = open("history.txt", O_CREAT | O_RDWR | O_TRUNC, 0600);
     historyget();
-    // fd = open("history.txt", O_CREAT | O_RDWR | O_TRUNC, 0600);
-    int size;
-    // char* command;
-    // size_t len;
-    // getline(&command, &len, stdin);
-    
+    int size;    
     while(1)
     {
         prompt();
-        scanf("%[^\n]%*c",command);
-        // printf("command: %s\n",command);
-        if(strcmp(command,"\0") == 0)   //// STILL NEED TO FIX EMPTY COMMAND BUG - INFINITE LOOP  
-        {
-            // prompt();
-            // scanf("%[^\n]%*c",command);
-            // command[size] = '\0';
-        }
-        else if(strcmp(command,"exit") == 0)
-        {
-            historylog(command);
-            return 0;
-        }
-        else
-        {
-            historylog(command);
-            historysave();
-            getcommand(command);
-        }
+        scanf("%[^\n]s",command);
+        char x;
+        scanf("%c",&x);
+        historylog(command);
+        historysave();
+        getcommand(command);
     }
 }
