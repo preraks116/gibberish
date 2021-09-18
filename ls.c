@@ -45,7 +45,7 @@ void fileperms(char *arg)
     printf("%s ", permissions);
 }
 
-void lscmd(char *command) //ERROR WITH ls -l ..
+void lscmd(char *command) 
 {
     int flagA = 0, flagL = 0, pathIndex = 0;
     char *token = strtok(command, " \t");
@@ -122,7 +122,7 @@ void lscmd(char *command) //ERROR WITH ls -l ..
                     }
                     else
                     {
-                        while ((d = readdir(dh)) != NULL) //append d_name to patharray and pass to stat
+                        while ((d = readdir(dh)) != NULL) 
                         {
                             strcpy(temp, pathArray[i]);
                             strcat(temp, "/");

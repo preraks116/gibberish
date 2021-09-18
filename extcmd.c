@@ -7,7 +7,7 @@ struct processNode
     Ptrprocessnode next;
 };
 
-Ptrprocessnode InitProcessNode() //initializes a BankNode
+Ptrprocessnode InitProcessNode() 
 {
     Ptrprocessnode P = (Ptrprocessnode)malloc(sizeof(processnode));
     P->pid = 0;
