@@ -21,6 +21,10 @@ void historyget()
 
 void historylog(char* command)
 {
+    if(strcmp(command,history[historyIndex-1]) == 0)
+    {
+        return;
+    }
     if(historyIndex == 20)
     {
         for(int i = 0; i < 19; i++)

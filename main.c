@@ -69,7 +69,7 @@ int main() {
                         {
                             printf("\r");
                             prompt();
-                            for(int j = 0; j < pt+10; j++)
+                            for(int j = 0; j < pt+1; j++)
                             {
                                 printf(" ");
                             }

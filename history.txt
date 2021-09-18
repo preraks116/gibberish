@@ -1,1 +1,1 @@
-echo hi    ;eoc    ;echo hi    ;repeat 2 echo hi    ;los    ;ls    ;firefox &    ; .&    ;1    ;pipi    ;nf   ;pinfo   ;pinfo   ;pinfo 11761  ;pinfo  ;ls  ;ls -l   ;ls -l .. ../..  ;history ;git status
+exit      ;exit     ;ls     ;ls     ;ls     ;ls -l .     ;exit    ;pinfo 11761          ;exit   ;ls           ;exit  ;pinfo  ;exit  ;ls ;history ;ld ;ls ;history ;ls ;history
