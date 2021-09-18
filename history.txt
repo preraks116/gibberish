@@ -1,1 +1,1 @@
-ls ;history
+ls   ;exit  ;history  ;ls  ;ls -l .. ../..  ;exit ;history ;pwd ;sleep 2 & ;exit
