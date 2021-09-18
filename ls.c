@@ -71,6 +71,11 @@ void lscmd(char *command) //ERROR WITH ls -l ..
                 }
             }
         }
+        else if (token[0] == '~')
+        {
+            strcpy(pathArray[pathIndex],home);
+            pathIndex++;
+        }
         else
         {
             strcpy(pathArray[pathIndex], token);
