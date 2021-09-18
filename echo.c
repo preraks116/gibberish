@@ -1,6 +1,6 @@
 #include "main.h"
 
-void echocmd(char* command) ///// SEG FAULTS IF YOU PUT AROUND 20 SPACES 
+void echocmd(char* command)
 {
     // printf("command: %s\n",command);
     char* token = strtok(command, " \t");

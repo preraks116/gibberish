@@ -7,11 +7,8 @@
 #include "pinfo.c"
 #include "extcmd.c"
 #include "history.c"
-// typedef struct process
-// {
-//     int pid;
-//     char name[MAX_SIZE];
-// }process;
+#include "arrowkey.c"
+// #include "main.h"
 
 void getcommand(char* command)
 {
@@ -20,7 +17,7 @@ void getcommand(char* command)
         char allcomms[MAX][MAX];
         int i = 0;
         char* splitcom = strtok(command, ";\n");
-        while (splitcom != NULL) // prints every token
+        while (splitcom != NULL) 
         {
             strcpy(allcomms[i],splitcom);
             splitcom = strtok(NULL, ";");
@@ -35,8 +32,6 @@ void getcommand(char* command)
     {
         char args[MAX];
         strcpy(args,command);
-        // write(fd, args, strlen(args));
-        // write(fd,"\n",1);
         char* token = strtok(args, " \t");
         if(strcmp(token,"pwd") == 0){ pwdcmd(); }
         else if(strcmp(token,"exit") == 0) {exit(EXIT_SUCCESS);}
@@ -51,20 +46,77 @@ void getcommand(char* command)
     
 }
 
-int main(int argc, char* argv[])
-{
+int main() {
+    char *inp = malloc(sizeof(char) * MAX);
+    char c;
     getcwd(home,MAX);
-    char command[MAX];
     historyget();
-    int size;    
-    while(1)
-    {
+    while (1) {
+        setbuf(stdout, NULL);
+        enableRawMode();
         prompt();
-        scanf("%[^\n]s",command);
-        char x;
-        scanf("%c",&x);
-        historylog(command);
+        memset(inp, '\0', MAX);
+        int pt = 0;
+        int i = historyIndex - 1;
+        while (read(STDIN_FILENO, &c, 1) == 1) {
+            if (iscntrl(c)) {
+                if (c == 10) break;
+                else if (c == 27) {
+                    char buf[3];
+                    buf[2] = 0;
+                    if (read(STDIN_FILENO, buf, 2) == 2) { // length of escape code
+                        if(strcmp(buf,"[A") == 0)
+                        {
+                            printf("\r");
+                            prompt();
+                            for(int j = 0; j < pt+10; j++)
+                            {
+                                printf(" ");
+                            }
+                            printf("\r");
+                            prompt();
+                            memset(inp, '\0', MAX);
+                            pt = 0;
+                            for(int j = 0; j < strlen(history[i]); j++)
+                            {
+                                inp[pt++] = history[i][j];
+                            }
+                            printf("%s", history[i]);
+                            if(i > 0){i--;}
+                        }
+                    }
+                } else if (c == 127) { // backspace
+                    if (pt > 0) {
+                        if (inp[pt-1] == 9) {
+                            for (int i = 0; i < 7; i++) {
+                                printf("\b");
+                            }
+                        }
+                        inp[--pt] = '\0';
+                        printf("\b \b");
+                    }
+                } else if (c == 9) { // TAB character
+                    inp[pt++] = c;
+                    for (int i = 0; i < 8; i++) { // TABS should be 8 spaces
+                        printf(" ");
+                    }
+                } else if (c == 4) {
+                    exit(0);
+                } else {
+                    printf("%d\n", c);
+                }
+            } else {
+                inp[pt++] = c;
+                printf("%c", c);
+            }
+        }
+        disableRawMode();
+
+        // printf("\nInput Read: [%s]\n", inp);
+        historylog(inp);
         historysave();
-        getcommand(command);
+        printf("\n");
+        getcommand(inp);
     }
+    return 0;
 }

@@ -4,15 +4,18 @@ int historyIndex = 0;
 
 void historyget()
 {
-   FILE* file = fopen("history.txt", "r"); 
-   char buffer[MAX];
-   fgets(buffer, sizeof(buffer), file);
-   char* token = strtok(buffer, ";");
-   for(;token != NULL; historyIndex++)
-   {
-       strcpy(history[historyIndex],token);
-       token = strtok(NULL, ";");
-   }
+    char homePath[MAX];
+    strcpy(homePath,home);
+    strcat(homePath,"/history.txt");
+    FILE* file = fopen(homePath, "r"); 
+    char buffer[MAX];
+    fgets(buffer, sizeof(buffer), file);
+    char* token = strtok(buffer, ";");
+    for(;token != NULL; historyIndex++)
+    {
+        strcpy(history[historyIndex],token);
+        token = strtok(NULL, ";");
+    }
 
 }
 

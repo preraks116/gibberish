@@ -1,1 +1,1 @@
-ls    ;ls    ;exit   ;ls   ;history   ;cd ..   ;ls   ;history   ;ls   ;cd gibberish   ;ls   ;ls   ;history   ;history 5   ;exit  ;history  ;exit ;ls ;l ;exit
+echo hi    ;eoc    ;echo hi    ;repeat 2 echo hi    ;los    ;ls    ;firefox &    ; .&    ;1    ;pipi    ;nf   ;pinfo   ;pinfo   ;pinfo 11761  ;pinfo  ;ls  ;ls -l   ;ls -l .. ../..  ;history ;git status

@@ -41,7 +41,7 @@ void pinfocmd(char* command)
         if(y == tcgetpgrp(0)){strcat(status,"+");}
         printf("Process Status -- %s\n",status);
         for(int i = 3; i < 23; i++){token = strtok(NULL, " ");}
-        printf("memory -- %s {Virtual Memory}\n",token);
+        printf("memory -- %s\n",token);
         strcat(copyprocstat,"/exe");
         char buffer3[MAX];
         int x = readlink(copyprocstat,buffer3,MAX);
