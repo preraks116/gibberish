@@ -21,6 +21,12 @@
 
 struct termios orig_termios;
 
+typedef struct processNode processnode;
+typedef struct processNode * Ptrprocessnode;
+
+
+
+Ptrprocessnode header;
 char history[20][MAX];
 char oldd[MAX];
 char home[MAX];

@@ -1,1 +1,1 @@
-pwd     ;ecoh hi     ;ls    ;history   ;history 5   ;ls   ;ls -l  ;ls  ;ls -l  ;ls -l ../.. .  ;ls main.c  ;ls -l main.c  ;ls -l .. ../.. main.c  ;exit ;ls ~ ;cd / ;ls ~ ;cd - ;pwd ;
+@     ;ls     ;ls -l     ;clear     ;exit    ;@   ;ls   ;ls -l  ;@  ;ls  ;ls -l   ;ls -l .. ../..  ;clear  ;ls  ;pwd ;ls  ;ls -l ;pwd ;pl ;vim &

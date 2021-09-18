@@ -8,10 +8,17 @@
 #include "extcmd.c"
 #include "history.c"
 #include "arrowkey.c"
-// #include "main.h"
+#include "finishbg.c"
+#include "main.h"
+
+
 
 void getcommand(char* command)
 {
+    if(strcmp(command,"@") == 0)
+    {
+        return;
+    }
     if(strchr(command,';'))
     {
         char allcomms[MAX][MAX];
@@ -46,26 +53,34 @@ void getcommand(char* command)
     
 }
 
-int main() {
+int main() 
+{
     char* command = malloc(sizeof(char) * MAX);
     char c;
     getcwd(home,MAX);
     historyget();
-
-    while (1) {
+    header = InitProcessNode();
+    while (1) 
+    {
+        signal(SIGCHLD,finishbg);
         setbuf(stdout, NULL);
         enableRawMode();
         prompt();
         memset(command, '\0', MAX);
+        strcpy(command,"@");
         int pt = 0;
         int i = historyIndex - 1;
-        while (read(STDIN_FILENO, &c, 1) == 1) {
-            if (iscntrl(c)) {
+        while (read(STDIN_FILENO, &c, 1) == 1) 
+        {
+            if (iscntrl(c)) 
+            {
                 if (c == 10) break;
-                else if (c == 27) {
+                else if (c == 27) 
+                {
                     char buf[3];
                     buf[2] = 0;
-                    if (read(STDIN_FILENO, buf, 2) == 2) { 
+                    if (read(STDIN_FILENO, buf, 2) == 2) 
+                    { 
                         if(strcmp(buf,"[A") == 0)
                         {
                             printf("\r");
@@ -83,27 +98,29 @@ int main() {
                             if(i > 0){i--;}
                         }
                     }
-                } else if (c == 127) { 
-                    if (pt > 0) {
-                        if (command[pt-1] == 9) {
-                            for (int i = 0; i < 7; i++) {
-                                printf("\b");
-                            }
+                } 
+                else if (c == 127) 
+                { 
+                    if (pt > 0) 
+                    {
+                        if (command[pt-1] == 9) 
+                        {
+                            for (int i = 0; i < 7; i++) {printf("\b");}
                         }
                         command[--pt] = '\0';
                         printf("\b \b");
                     }
-                } else if (c == 9) { // TAB character
+                } 
+                else if (c == 9) 
+                { 
                     command[pt++] = c;
-                    for (int i = 0; i < 8; i++) { // TABS should be 8 spaces
-                        printf(" ");
-                    }
-                } else if (c == 4) {
-                    exit(0);
-                } else {
-                    printf("%d\n", c);
-                }
-            } else {
+                    for (int i = 0; i < 8; i++) { printf(" ");}
+                } 
+                else if (c == 4) {exit(0);} 
+                else {printf("%d\n", c);}
+            } 
+            else 
+            {
                 command[pt++] = c;
                 printf("%c", c);
             }
@@ -114,5 +131,4 @@ int main() {
         printf("\n");
         getcommand(command);
     }
-    return 0;
 }
