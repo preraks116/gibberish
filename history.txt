@@ -1,1 +1,1 @@
-history 2   ;cat history.txt  ;ls  ;ls ;echo hi hi hi ;echo hi			hi ;echo hi						hi ;echo hi									hi ;ls ;cd .. ;cd ~ ;exit
+echo hi									hi     ;ls     ;cd ..     ;cd ~     ;exit    ;ls    ;pwd    ;ecoh hi    ;ls   ;history  ;history 5  ;ls  ;ls -l ;ls ;ls -l ;ls -l ../.. . ;ls main.c ;ls -l main.c ;ls -l .. ../.. main.c ;exit

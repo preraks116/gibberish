@@ -47,15 +47,16 @@ void getcommand(char* command)
 }
 
 int main() {
-    char *inp = malloc(sizeof(char) * MAX);
+    char* command = malloc(sizeof(char) * MAX);
     char c;
     getcwd(home,MAX);
     historyget();
+
     while (1) {
         setbuf(stdout, NULL);
         enableRawMode();
         prompt();
-        memset(inp, '\0', MAX);
+        memset(command, '\0', MAX);
         int pt = 0;
         int i = historyIndex - 1;
         while (read(STDIN_FILENO, &c, 1) == 1) {
@@ -72,11 +73,11 @@ int main() {
                             for(int j = 0; j < pt+1; j++){printf(" ");}
                             printf("\r");
                             prompt();
-                            memset(inp, '\0', MAX);
+                            memset(command, '\0', MAX);
                             pt = 0;
                             for(int j = 0; j < strlen(history[i]); j++)
                             {
-                                inp[pt++] = history[i][j];
+                                command[pt++] = history[i][j];
                             }
                             printf("%s", history[i]);
                             if(i > 0){i--;}
@@ -84,16 +85,16 @@ int main() {
                     }
                 } else if (c == 127) { 
                     if (pt > 0) {
-                        if (inp[pt-1] == 9) {
+                        if (command[pt-1] == 9) {
                             for (int i = 0; i < 7; i++) {
                                 printf("\b");
                             }
                         }
-                        inp[--pt] = '\0';
+                        command[--pt] = '\0';
                         printf("\b \b");
                     }
                 } else if (c == 9) { // TAB character
-                    inp[pt++] = c;
+                    command[pt++] = c;
                     for (int i = 0; i < 8; i++) { // TABS should be 8 spaces
                         printf(" ");
                     }
@@ -103,17 +104,15 @@ int main() {
                     printf("%d\n", c);
                 }
             } else {
-                inp[pt++] = c;
+                command[pt++] = c;
                 printf("%c", c);
             }
         }
         disableRawMode();
-
-        // printf("\nInput Read: [%s]\n", inp);
-        historylog(inp);
+        historylog(command);
         historysave();
         printf("\n");
-        getcommand(inp);
+        getcommand(command);
     }
     return 0;
 }
