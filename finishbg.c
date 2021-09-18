@@ -17,7 +17,7 @@ void finishbg()
             }
         }
 
-        if (pid)
+        if(pid)
         {
             if (WIFEXITED(r))
                 printf("\n%s with pid %d exited normally\n", processname, pid);

@@ -1,1 +1,1 @@
-@     ;ls     ;ls -l     ;clear     ;exit    ;@   ;ls   ;ls -l  ;@  ;ls  ;ls -l   ;ls -l .. ../..  ;clear  ;ls  ;pwd ;ls  ;ls -l ;pwd ;pl ;vim &
+ls ;history

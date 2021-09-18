@@ -7,7 +7,7 @@ void historyget()
     char homePath[MAX];
     strcpy(homePath,home);
     strcat(homePath,"/history.txt");
-    FILE* file = fopen(homePath, "r"); 
+    FILE* file = fopen(homePath, "a"); 
     char buffer[MAX];
     fgets(buffer, sizeof(buffer), file);
     char* token = strtok(buffer, ";");
