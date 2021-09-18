@@ -64,15 +64,12 @@ int main() {
                 else if (c == 27) {
                     char buf[3];
                     buf[2] = 0;
-                    if (read(STDIN_FILENO, buf, 2) == 2) { // length of escape code
+                    if (read(STDIN_FILENO, buf, 2) == 2) { 
                         if(strcmp(buf,"[A") == 0)
                         {
                             printf("\r");
                             prompt();
-                            for(int j = 0; j < pt+1; j++)
-                            {
-                                printf(" ");
-                            }
+                            for(int j = 0; j < pt+1; j++){printf(" ");}
                             printf("\r");
                             prompt();
                             memset(inp, '\0', MAX);
@@ -85,7 +82,7 @@ int main() {
                             if(i > 0){i--;}
                         }
                     }
-                } else if (c == 127) { // backspace
+                } else if (c == 127) { 
                     if (pt > 0) {
                         if (inp[pt-1] == 9) {
                             for (int i = 0; i < 7; i++) {

@@ -1,1 +1,1 @@
-exit      ;exit     ;ls     ;ls     ;ls     ;ls -l .     ;exit    ;pinfo 11761          ;exit   ;ls           ;exit  ;pinfo  ;exit  ;ls ;history ;ld ;ls ;history ;ls ;history
+history 2   ;cat history.txt  ;ls  ;ls ;echo hi hi hi ;echo hi			hi ;echo hi						hi ;echo hi									hi ;ls ;cd .. ;cd ~ ;exit

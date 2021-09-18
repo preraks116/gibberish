@@ -11,6 +11,7 @@ void historyget()
     char buffer[MAX];
     fgets(buffer, sizeof(buffer), file);
     char* token = strtok(buffer, ";");
+    token = strtok(NULL, ";");
     for(;token != NULL; historyIndex++)
     {
         strcpy(history[historyIndex],token);
