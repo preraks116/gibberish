@@ -1,1 +1,0 @@
-lpe    ;prerak    ;ls    ;gedit     ;cat main.c    ;cat    ;exit   ;pinfo  ;ls  ;ls -l  ;ls -l .. ../..  ;ls   ;ls -l   ;ls   ;ls ;sleep 2 & ;lsls ;ls -l ;ls ;ls -l 
