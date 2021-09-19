@@ -30,6 +30,7 @@ Ptrprocessnode header;
 char history[20][MAX];
 char oldd[MAX];
 char home[MAX];
+char command[MAX];
 int fd;
 void die(const char *s);
 void disableRawMode();

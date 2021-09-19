@@ -23,6 +23,7 @@ void finishbg()
             else if (__WIFSTOPPED(r)){printf("suspended normally\n");}
             else{printf("exited abnormally\n");}
             prompt();
+            printf("%s",command);
             fflush(stdout);
         }
     }

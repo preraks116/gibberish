@@ -26,6 +26,10 @@ void historylog(char* command)
     {
         return;
     }
+    else if(strcmp(command,"@") == 0)
+    {
+        return;
+    }
     if(historyIndex == 20)
     {
         for(int i = 0; i < 19; i++)

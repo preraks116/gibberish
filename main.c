@@ -53,7 +53,6 @@ void getcommand(char* command)
 
 int main() 
 {
-    char* command = malloc(sizeof(char) * MAX);
     char c;
     getcwd(home,MAX);
     historyget();
@@ -83,7 +82,7 @@ int main()
                         {
                             printf("\r");
                             prompt();
-                            for(int j = 0; j < pt+1; j++){printf(" ");}
+                            for(int j = 0; j < 50; j++){printf(" ");}
                             printf("\r");
                             prompt();
                             memset(command, '\0', MAX);
