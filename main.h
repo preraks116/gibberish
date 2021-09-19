@@ -49,3 +49,4 @@ void pinfocmd(char* command);
 void prompt();
 void pwdcmd();
 void repeatcmd(char* command);
+void finishbg();

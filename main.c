@@ -9,8 +9,7 @@
 #include "history.c"
 #include "arrowkey.c"
 #include "finishbg.c"
-#include "main.h"
-
+// #include "main.h"
 
 
 void getcommand(char* command)

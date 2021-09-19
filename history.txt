@@ -1,1 +1,0 @@
-history    ;ls    ;ls -l .. ../..    ;exit   ;history   ;pwd   ;sleep 2 &   ;exit  ;@  ;ls  ;ls -l   ;ls -l .. ../..  ;cd .. ; repeat 3 echo hi  ;@  ;clear  ;exit ;ls -l . ..

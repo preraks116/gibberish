@@ -4,18 +4,26 @@ void repeatcmd(char* command)
 {
     char* token = strtok(command, " \t");
     token = strtok(NULL, " \t");
+    if(token == NULL)
+    {
+        printf("error: too few arguments\n");
+        return;
+    }
+
     int n = atoi(token);
-    // printf("%d\n",n);
+    if(n == 0)
+    {
+        printf("error: invalid argument\n");
+        return;
+    }
     token = strtok(NULL, " \t");
     char finalcom[MAX] = " ";
-    while (token != NULL) // prints every token
+    while (token != NULL) 
     {
-        // printf("%s ", token);
         strcat(finalcom,token);
         strcat(finalcom," ");
         token = strtok(NULL, " \t");
     }
-    // printf("%s\n",finalcom);
     for(int i = 0; i < n; i++)
     {
         char temp[MAX] = "";
