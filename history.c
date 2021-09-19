@@ -60,6 +60,11 @@ void historycmd(char* command)
         if(token != NULL)
         {
             x = atoi(token);
+            if(x == 0)
+            {
+                printf("error: invalid arguments\n");
+                return;
+            }
         }
         for(int i = historyIndex - x ; i < historyIndex; i++)
         {

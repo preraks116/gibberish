@@ -1,1 +1,0 @@
-sleep 2 &       ;cmatrix       ;exit      ;cmatrix      ;vi      ;vim      ;exit     ;vi     ;exit    ;vim    ;vi    ;exit   ;vim   ;exit  ;vim  ;exit ;vim ;vi ;vi & ;exit
