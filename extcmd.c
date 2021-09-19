@@ -52,12 +52,14 @@ void extcmd(char* command)
         {
             printf("%s: command not found\n",com);
         }
+        exit(1);
     }
     else
     {
         int r = 0;
         if(bg == 0)
         {
+            setpgid(forkReturn,0);
             signal(SIGTTOU, SIG_IGN);
             tcsetpgrp(0, forkReturn);
             waitpid(forkReturn,&r,WUNTRACED);

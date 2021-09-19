@@ -17,6 +17,11 @@ void repeatcmd(char* command)
         return;
     }
     token = strtok(NULL, " \t");
+    if(token == NULL)
+    {
+        printf("error: too few arguments\n");
+        return;
+    }
     char finalcom[MAX] = " ";
     while (token != NULL) 
     {
