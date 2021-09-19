@@ -50,7 +50,7 @@ void extcmd(char* command)
         int q = execvp(com,args);
         if(q == -1)
         {
-            printf("error : command not found\n");
+            printf("%s: command not found\n",com);
         }
     }
     else

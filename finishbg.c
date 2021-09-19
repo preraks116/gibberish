@@ -3,28 +3,25 @@
 void finishbg()
 {
     Ptrprocessnode Q = header;
-    int pid = 0, r, curpid;
+    int curpid = 0, r;
     char processname[MAX];
-    while ((pid = waitpid(-1, &r, WNOHANG | WUNTRACED)) > 0)
+    while ((curpid = waitpid(-1, &r, WNOHANG | WUNTRACED)) > 0)
     {
         while (Q->next != NULL)
         {
             Q = Q->next;
-            if (Q->pid == pid)
+            if (Q->pid == curpid)
             {
                 strcpy(processname, Q->processname);
                 break;
             }
         }
-
-        if(pid)
+        if(curpid)
         {
-            if (WIFEXITED(r))
-                printf("\n%s with pid %d exited normally\n", processname, pid);
-            else if (WIFSTOPPED(r))
-                printf("\n%s with pid %d suspended normally\n", processname, pid);
-            else
-                printf("\n%s with pid %d exited abnormally\n", processname, pid);
+            printf("\n%s with pid %d ",processname,curpid);
+            if (__WIFEXITED(r)){printf("exited normally\n");}
+            else if (__WIFSTOPPED(r)){printf("suspended normally\n");}
+            else{printf("exited abnormally\n");}
             prompt();
             fflush(stdout);
         }
