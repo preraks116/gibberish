@@ -10,6 +10,7 @@
 #include "arrowkey.c"
 #include "finishbg.c"
 #include "replay.c"
+#include "jobs.c"
 
 void getcommand(char* command)
 {
@@ -47,6 +48,7 @@ void getcommand(char* command)
         else if(strcmp(token,"pinfo") == 0){ pinfocmd(command);}
         else if(strcmp(token,"history") == 0){ historycmd(command);}
         else if(strcmp(token,"replay") == 0){replaycmd(command);}
+        else if(strcmp(token,"jobs") == 0){jobscmd(command);}
         else { extcmd(command); }
     }
     

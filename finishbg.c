@@ -13,6 +13,7 @@ void finishbg()
             if (Q->pid == curpid)
             {
                 strcpy(processname, Q->processname);
+                Q->status = 'S';
                 break;
             }
         }

@@ -1,9 +1,15 @@
 #include "main.h"
 
+
+int jobIndex = 0;
+
 struct processNode
 {
+    char processcommand[MAX];
+    int jobno;
     char processname[MAX]; 
     int pid; 
+    char status;
     Ptrprocessnode next;
 };
 
@@ -12,12 +18,15 @@ Ptrprocessnode InitProcessNode()
     Ptrprocessnode P = (Ptrprocessnode)malloc(sizeof(processnode));
     P->pid = 0;
     P->next = NULL;
+    P->status = 'R';
     return P;
 }
 
 void extcmd(char* command)
 {
     int bg = 0;
+    char commandcopy[MAX];
+    strcpy(commandcopy,command);
     if(strchr(command,'&')){bg = 1;}
     char* token = strtok(command, " \t");
     char* args[MAX] = {NULL};
@@ -70,12 +79,15 @@ void extcmd(char* command)
         {
             Ptrprocessnode P = InitProcessNode();
             Ptrprocessnode Q = header;
-            while(Q->next != NULL)
+            while(Q->next != NULL && strcmp(command,Q->processcommand) <= 0)
             {
                 Q = Q->next;
             }
             strcpy(P->processname,com);
+            P->jobno = ++jobIndex;
+            strcpy(P->processcommand,commandcopy);
             P->pid = forkReturn;
+            P->next = Q->next;
             Q->next = P;
             printf("%d\n",forkReturn);
         }
