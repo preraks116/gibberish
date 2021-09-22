@@ -79,7 +79,7 @@ void extcmd(char* command)
         {
             Ptrprocessnode P = InitProcessNode();
             Ptrprocessnode Q = header;
-            while(Q->next != NULL && strcmp(command,Q->processcommand) <= 0)
+            while(Q->next != NULL && strcmp(command,Q->processcommand) > 0)
             {
                 Q = Q->next;
             }
