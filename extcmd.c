@@ -22,6 +22,32 @@ Ptrprocessnode InitProcessNode()
     return P;
 }
 
+char getstatus(int curpid)
+{
+    char pid[MAX];
+    sprintf(pid,"%d",curpid);
+    char procstat[MAX] = "/proc/";
+    char buffer[MAX];
+    char status;
+    strcat(procstat,pid);
+    strcat(procstat,"/stat");
+    int fd = open(procstat, O_RDONLY);
+    if(fd == -1)
+    {
+        printf("error: pid %d not found\n",curpid);
+    }
+    else
+    {
+        read(fd, buffer, MAX);
+        close(fd);
+        char* token = strtok(buffer, " \t");
+        token = strtok(NULL, " \t");
+        token = strtok(NULL, " \t");
+        status = token[0];
+    }
+    return status;
+}
+
 void extcmd(char* command)
 {
     int bg = 0;

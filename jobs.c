@@ -1,5 +1,17 @@
 #include "main.h"
 
+void printjobs(char* status,Ptrprocessnode X)
+{
+    printf("[%d] ",X->jobno);
+    printf("%s ",status);
+    // printf("%s ",X->processcommand);
+    for(int i = 0; X->processcommand[i+1] != '&'; i++)
+    {
+        printf("%c",X->processcommand[i]);
+    }
+    printf(" [%d]\n",X->pid);
+}
+
 void jobscmd(char* command)
 {
     int flagR = 0, flagS = 0; 
@@ -21,20 +33,8 @@ void jobscmd(char* command)
     Ptrprocessnode X = header->next;
     while(X != NULL)
     {
-        if(flagR == 1 && X->status == 'R')
-        {
-            printf("[%d] ",X->jobno);
-            printf("Running ");
-            printf("%s ",X->processcommand);
-            printf("[%d]\n",X->pid);
-        }
-        else if(flagS == 1 && X->status == 'S')
-        {
-            printf("[%d] ",X->jobno);
-            printf("Stopped ");
-            printf("%s ",X->processcommand);
-            printf("[%d]\n",X->pid);
-        }
+        if(flagR == 1 && X->status == 'R'){printjobs("Running",X);}
+        else if(flagS == 1 && X->status == 'S'){printjobs("Stopped",X);}
         X = X->next;
     }
 }
