@@ -11,6 +11,7 @@
 #include "finishbg.c"
 #include "replay.c"
 #include "jobs.c"
+#include "signalhandler.c"
 
 void getcommand(char* command)
 {
@@ -40,7 +41,7 @@ void getcommand(char* command)
         strcpy(args,command);
         char* token = strtok(args, " \t");
         if(strcmp(token,"pwd") == 0){ pwdcmd(); }
-        else if(strcmp(token,"exit") == 0) {exit(EXIT_SUCCESS);}
+        else if(strcmp(token,"exit") == 0 || strcmp(token,"logout") == 0) {exit(EXIT_SUCCESS);}
         else if(strcmp(token,"echo") == 0) {echocmd(command);}
         else if(strcmp(token,"cd") == 0) {cdcmd(command);}
         else if(strcmp(token,"repeat") == 0){ repeatcmd(command);}
@@ -59,10 +60,14 @@ int main()
     char c;
     getcwd(home,MAX);
     historyget();
+    int shellpid = tcgetpgrp(0);
+    // printf("shellpid:%d\n",shellpid);
     header = InitProcessNode();
     while (1) 
     {
         signal(SIGCHLD,finishbg);
+        signal(SIGINT,ctrlChandler);
+        signal(SIGTSTP, ctrlZhandler);
         setbuf(stdout, NULL);
         enableRawMode();
         prompt();
@@ -85,7 +90,7 @@ int main()
                         {
                             printf("\r");
                             prompt();
-                            for(int j = 0; j < 50; j++){printf(" ");}
+                            for(int j = 0; j < 60; j++){printf(" ");}
                             printf("\r");
                             prompt();
                             memset(command, '\0', MAX);
@@ -116,8 +121,8 @@ int main()
                     command[pt++] = c;
                     for (int i = 0; i < 8; i++) { printf(" ");}
                 } 
-                else if (c == 4) {exit(0);} 
-                else {printf("%d\n", c);}
+                else if (c == 4) {ctrlDhandler(pt);} //ctrl + D handler
+                else {printf("%d\n", c);} 
             } 
             else 
             {
