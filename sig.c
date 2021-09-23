@@ -16,9 +16,11 @@ void sigcmd(char* command)
         Q = Q->next;
         if (Q->jobno == jobno)
         {
-            kill(jobno,signo);
+            // printf("%d\n",Q->pid);
+            kill(Q->pid,signo);
             return;
         }
     }
+    printf("error: job number specified does not exist\n");
     
 }
