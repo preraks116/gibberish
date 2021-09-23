@@ -12,6 +12,7 @@
 #include "replay.c"
 #include "jobs.c"
 #include "signalhandler.c"
+#include "sig.c"
 
 void getcommand(char* command)
 {
@@ -50,6 +51,7 @@ void getcommand(char* command)
         else if(strcmp(token,"history") == 0){ historycmd(command);}
         else if(strcmp(token,"replay") == 0){replaycmd(command);}
         else if(strcmp(token,"jobs") == 0){jobscmd(command);}
+        else if(strcmp(token,"sig") == 0){sigcmd(command);}
         else { extcmd(command); }
     }
     
