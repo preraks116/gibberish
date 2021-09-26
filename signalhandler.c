@@ -2,11 +2,6 @@
 
 void ctrlChandler()
 {
-    int curpid = tcgetpgrp(0);
-    if(curpid == shellpid)
-    {
-        return;
-    }
     printf("\n");
     prompt();
 }
@@ -18,6 +13,21 @@ void ctrlZhandler()
     {
         return;
     }
+    kill(SIGSTOP,curpid);
+    Ptrprocessnode P = InitProcessNode();
+    Ptrprocessnode Q = header;
+    while(Q->next != NULL && strcmp(command,Q->processcommand) > 0)
+    {
+        Q = Q->next;
+    }
+    strcpy(P->processcommand,command);
+    char* token = strtok(command, " \t");
+    strcpy(P->processname,token);
+    P->jobno = ++jobIndex;
+    P->pid = curpid;
+    P->next = Q->next;
+    Q->next = P;
+    printf("%d\n",curpid);
     printf("\n");
     prompt();
 }

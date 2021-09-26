@@ -10,12 +10,12 @@ void historyget()
     FILE* file = fopen(homePath, "r"); 
     char buffer[MAX];
     fgets(buffer, sizeof(buffer), file);
-    char* token = strtok(buffer, ";");
-    token = strtok(NULL, ";");
+    char* token = strtok(buffer, "@");
+    token = strtok(NULL, "@");
     for(;token != NULL; historyIndex++)
     {
         strcpy(history[historyIndex],token);
-        token = strtok(NULL, ";");
+        token = strtok(NULL, "@");
     }
 
 }
@@ -86,6 +86,6 @@ void historysave()
     for(int i = 0; i < historyIndex; i++)
     {
         write(fd,history[i],strlen(history[i]));
-        if(i != historyIndex - 1){write(fd," ;",2);}
+        if(i != historyIndex - 1){write(fd," @",2);}
     }
 }
