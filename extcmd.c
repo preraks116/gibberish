@@ -103,18 +103,7 @@ void extcmd(char* command)
         }
         else
         {
-            Ptrprocessnode P = InitProcessNode();
-            Ptrprocessnode Q = header;
-            while(Q->next != NULL && strcmp(command,Q->processcommand) > 0)
-            {
-                Q = Q->next;
-            }
-            strcpy(P->processname,com);
-            P->jobno = ++jobIndex;
-            strcpy(P->processcommand,commandcopy);
-            P->pid = forkReturn;
-            P->next = Q->next;
-            Q->next = P;
+            addjob(commandcopy,forkReturn,'R');
             printf("%d\n",forkReturn);
         }
     }

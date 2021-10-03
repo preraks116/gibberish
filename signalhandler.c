@@ -18,6 +18,8 @@ void ctrlZhandler()
     {
         return;
     }
+    kill(curpid, SIGTSTP);
+    addjob(command,curpid,'S');
     printf("\n");
     prompt();
 }
@@ -29,4 +31,5 @@ void ctrlDhandler(int pt)
     getcommand("logout");
 }
 
+//it should push any currently running foreground job into the background, and change its state from running to stopped. This should have no effect on the shell if there is no foreground process running
 

@@ -24,3 +24,21 @@ void jobscmd(char* command)
         X = X->next;
     }
 }
+
+void addjob(char* command, int pid, char status)
+{
+    Ptrprocessnode P = InitProcessNode();
+    Ptrprocessnode Q = header;
+    while(Q->next != NULL && strcmp(command,Q->processcommand) > 0)
+    {
+        Q = Q->next;
+    }
+    P->jobno = ++jobIndex;
+    strcpy(P->processcommand,command);
+    char* token = strtok(command, " \t");
+    strcpy(P->processname,token);
+    P->pid = pid;
+    P->status = status;
+    P->next = Q->next;
+    Q->next = P;
+}

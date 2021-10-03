@@ -52,3 +52,4 @@ void prompt();
 void pwdcmd();
 void repeatcmd(char* command);
 void finishbg();
+void addjob(char* command, int pid, char status);
