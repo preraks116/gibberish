@@ -11,9 +11,11 @@ void ctrlChandler()
     prompt();
 }
 
-void ctrlZhandler()
+void ctrlZhandler() //doesnt work
 {
     int curpid = tcgetpgrp(0);
+    // printf("%d\n",curpid);
+    // printf("%d\n",shellpid);
     if(curpid == shellpid)
     {
         return;
