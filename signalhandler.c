@@ -2,11 +2,6 @@
 
 void ctrlChandler()
 {
-    int curpid = tcgetpgrp(0);
-    if(curpid == shellpid)
-    {
-        return;
-    }
     printf("\n");
     prompt();
 }

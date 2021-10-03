@@ -36,4 +36,6 @@ gibberish
 ├── main.c          - contains the main function that runs the entire shell
 └── history.txt     - has history saved
 ```
-
+## Errors
+`ls -l total is wrong`
+`pinfo seg faults- path error maybe`
