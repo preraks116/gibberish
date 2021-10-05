@@ -39,3 +39,4 @@ gibberish
 ## Errors
 `ls -l total is wrong`
 `pinfo seg faults- path error maybe`
+`change all strtok to strtok_r`
