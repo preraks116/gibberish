@@ -16,6 +16,7 @@
 #include <fcntl.h>
 #include <termios.h>
 #include <ctype.h>
+#include <conio.h>
 
 #define MAX (int)1e3+5
 
@@ -53,3 +54,6 @@ void pwdcmd();
 void repeatcmd(char* command);
 void finishbg();
 void addjob(char* command, int pid, char status);
+void removejob(int pid);
+void ctrlZhandler();
+void ctrlChandler();

@@ -42,3 +42,16 @@ void addjob(char* command, int pid, char status)
     P->next = Q->next;
     Q->next = P;
 }
+
+void removejob(int pid)
+{
+    // Ptrprocessnode P = InitProcessNode();
+    Ptrprocessnode Q = header;
+    while(Q->next != NULL && Q->next->pid != pid)
+    {
+        Q = Q->next;
+    }
+    Ptrprocessnode P = Q->next;
+    Q->next = Q->next->next;
+    free(P);
+}

@@ -15,6 +15,7 @@
 #include "sig.c"
 #include "fg.c"
 #include "bg.c"
+#include "baywatch.c"
 
 void getcommand(char* command)
 {
@@ -56,6 +57,7 @@ void getcommand(char* command)
         else if(strcmp(token,"sig") == 0){sigcmd(command);}
         else if(strcmp(token,"fg") == 0){fgcmd(command);}
         else if(strcmp(token,"bg") == 0){bgcmd(command);}
+        else if(strcmp(token,"baywatch") == 0){baywatchcmd(command);}
         else { extcmd(command); }
     }
     

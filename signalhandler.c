@@ -15,7 +15,9 @@ void ctrlZhandler() //doesnt work
     {
         return;
     }
+    printf("hi\n");
     kill(curpid, SIGTSTP);
+    printf("%s\n",command);
     addjob(command,curpid,'S');
     printf("\n");
     prompt();
