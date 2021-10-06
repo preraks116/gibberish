@@ -3,9 +3,10 @@
 void cdcmd(char* command)
 {
     char cur[MAX];
+    char* temp;
     getcwd(cur,MAX);
-    char* token = strtok(command, " \t");
-    token = strtok(NULL, " \t");
+    char* token = strtok_r(command, " \t",&temp);
+    token = strtok_r(NULL, " \t", &temp);
     if(token == NULL)
     {
         int r = chdir(home);
@@ -14,7 +15,7 @@ void cdcmd(char* command)
     }
     else
     {
-        char* token2 = strtok(NULL, " \t");
+        char* token2 = strtok_r(NULL, " \t", &temp);
         if(token2 != NULL)
         {
             printf("Error: Too many arguments\n");

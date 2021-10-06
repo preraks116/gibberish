@@ -27,18 +27,9 @@ void baywatchcmd(char *command)
         }
         else
         {
-            if (strcmp(token,"interrupt") == 0)
-            {
-                p = 1;
-            }
-            else if (strcmp(token,"newborn") == 0)
-            {
-                q = 1;
-            }
-            else if (strcmp(token,"dirty") == 0)
-            {
-                r = 1;
-            }
+            if (strcmp(token,"interrupt") == 0){p = 1;}
+            else if (strcmp(token,"newborn") == 0){q = 1;}
+            else if (strcmp(token,"dirty") == 0){r = 1;}
             token = strtok(NULL, " \t");
         }
     }

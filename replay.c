@@ -3,9 +3,10 @@
 void replaycmd(char* command)
 {
     // printf("%s\n",command);
-    char* token = strtok(command, " \t");
+    char* temp;
+    char* token = strtok_r(command, " \t", &temp);
     // printf("token:%s\n",token);
-    token = strtok(NULL, " \t");
+    token = strtok_r(NULL, " \t", &temp);
     char finalcommand[MAX] = "";
     int interval, period;
     int i = 0;
@@ -14,7 +15,7 @@ void replaycmd(char* command)
     {
         if(strcmp(token,"-command") == 0)
         {
-            token = strtok(NULL, " \t");
+            token = strtok_r(NULL, " \t", &temp);
             if(token == NULL)
             {
                 printf("error: no command given\n");
@@ -28,14 +29,14 @@ void replaycmd(char* command)
                     strcat(finalcommand,token);
                     strcat(finalcommand," ");
                     // printf("finalcommand: %s\n",finalcommand);
-                    token = strtok(NULL, " \t");
+                    token = strtok_r(NULL, " \t", &temp);
                 }
                 p = 1;
             }
         }
         else if(strcmp(token,"-interval") == 0)
         {
-            token = strtok(NULL, " \t");
+            token = strtok_r(NULL, " \t", &temp);
             if(token == NULL)
             {
                 printf("error: no interval given\n");
@@ -44,13 +45,13 @@ void replaycmd(char* command)
             else
             {
                 interval = atoi(token);
-                token = strtok(NULL, " \t");
+                token = strtok_r(NULL, " \t", &temp);
                 q = 1;
             }
         }
         else if(strcmp(token,"-period") == 0)
         {
-            token = strtok(NULL, " \t");
+            token = strtok_r(NULL, " \t", &temp);
             if(token == NULL)
             {
                 printf("error: no period given\n");
@@ -59,7 +60,7 @@ void replaycmd(char* command)
             else
             {
                 period = atoi(token);
-                token = strtok(NULL, " \t");
+                token = strtok_r(NULL, " \t", &temp);
                 r = 1;
             }
         }
@@ -73,7 +74,7 @@ void replaycmd(char* command)
         printf("error: insufficient arguments\n");
         return;
     }
-    char temp[MAX];
+    char temp2[MAX];
     while(1)
     {
         i++;
@@ -84,8 +85,8 @@ void replaycmd(char* command)
         sleep(1);
         if(i != 0 && i % interval == 0)
         {
-            strcpy(temp,finalcommand);
-            getcommand(temp);
+            strcpy(temp2,finalcommand);
+            getcommand(temp2);
         }
     }
 }

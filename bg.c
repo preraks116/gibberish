@@ -6,8 +6,9 @@ void bgcmd(char* command)
     Ptrprocessnode Q = header;
     int jobno=0;
 	char *token;
-	token = strtok(command, " \t");
-	token = strtok(NULL, " \t");
+    char* temp;
+	token = strtok_r(command, " \t", &temp);
+	token = strtok_r(NULL, " \t", &temp);
     if(token == NULL){printf("error: job number not specified\n");return;}
 	jobno = atoi(token);
     while(Q->next != NULL)

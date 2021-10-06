@@ -49,16 +49,17 @@ void reset_stdio()
 void inputredircmd(char *command)
 {
     char *filename;
+    char* temp;
     char finalcom[MAX];
     int i = 0;
-    char *token = strtok(command, " \t");
+    char *token = strtok_r(command, " \t", &temp);
 
     char args[MAX][MAX];
     while (token != NULL)
     {
         strcpy(args[i], token);
         i++;
-        token = strtok(NULL, " \t");
+        token = strtok_r(NULL, " \t", &temp);
     }
     // args[i+1] = malloc(MAX);
     // for (int i = 0; args[i] != NULL; i++)
@@ -67,7 +68,6 @@ void inputredircmd(char *command)
     // }
     int argindex = 0;
     strcpy(finalcom, args[0]);
-    // argindex++;
     for (argindex = 1; argindex < i; argindex++)
     {
         if (strcmp(args[argindex], ">") == 0)

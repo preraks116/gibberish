@@ -47,10 +47,11 @@ void fileperms(char *arg)
 
 void lscmd(char *command) 
 {
+    char* hello;
     int flagA = 0, flagL = 0, pathIndex = 0;
-    char *token = strtok(command, " \t");
+    char *token = strtok_r(command, " \t", &hello);
     char temp[MAX];
-    token = strtok(NULL, " \t");
+    token = strtok_r(NULL, " \t", &hello);
     char pathArray[MAX][MAX];
     char curPath[MAX];
     getcwd(curPath, MAX);
@@ -81,7 +82,7 @@ void lscmd(char *command)
             strcpy(pathArray[pathIndex], token);
             pathIndex++;
         }
-        token = strtok(NULL, " \t");
+        token = strtok_r(NULL, " \t", &hello);
     }
     // printf("PATHS:\n");
     // for(int i = 0; i < pathIndex; i++)

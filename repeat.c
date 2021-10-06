@@ -2,8 +2,9 @@
 
 void repeatcmd(char* command)
 {
-    char* token = strtok(command, " \t");
-    token = strtok(NULL, " \t");
+    char* temp;
+    char* token = strtok_r(command, " \t", &temp);
+    token = strtok_r(NULL, " \t", &temp);
     if(token == NULL)
     {
         printf("error: too few arguments\n");
@@ -16,7 +17,7 @@ void repeatcmd(char* command)
         printf("error: invalid argument\n");
         return;
     }
-    token = strtok(NULL, " \t");
+    token = strtok_r(NULL, " \t", &temp);
     if(token == NULL)
     {
         printf("error: too few arguments\n");
@@ -27,7 +28,7 @@ void repeatcmd(char* command)
     {
         strcat(finalcom,token);
         strcat(finalcom," ");
-        token = strtok(NULL, " \t");
+        token = strtok_r(NULL, " \t", &temp);
     }
     for(int i = 0; i < n; i++)
     {

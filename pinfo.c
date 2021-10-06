@@ -3,8 +3,9 @@
 
 void pinfocmd(char* command)
 {
-    char* token = strtok(command, " \t");
-    token = strtok(NULL, " \t");
+    char* temp;
+    char* token = strtok_r(command, " \t", &temp);
+    token = strtok_r(NULL, " \t", &temp);
     char procstat[MAX] = "/proc/";
     char curpid[MAX]; 
     if(token == NULL)
@@ -30,9 +31,9 @@ void pinfocmd(char* command)
     {
         read(fd, buffer, MAX);
         close(fd);
-        char* token = strtok(buffer, " \t");
-        token = strtok(NULL, " \t");
-        token = strtok(NULL, " \t");
+        char* token = strtok_r(buffer, " \t", &temp);
+        token = strtok_r(NULL, " \t", &temp);
+        token = strtok_r(NULL, " \t", &temp);
         // printf("%s\n",buffer);
         printf("pid -- %s\n",curpid);
         char status[MAX];
@@ -40,7 +41,7 @@ void pinfocmd(char* command)
         int y = atoi(curpid);
         if(y == tcgetpgrp(0)){strcat(status,"+");}
         printf("Process Status -- %s\n",status);
-        for(int i = 3; i < 23; i++){token = strtok(NULL, " ");}
+        for(int i = 3; i < 23; i++){token = strtok_r(NULL, " ",&temp);}
         printf("memory -- %s B\n",token);
         strcat(copyprocstat,"/exe");
         char buffer3[MAX];

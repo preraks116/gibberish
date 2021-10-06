@@ -11,8 +11,9 @@ void printjobs(char* status,Ptrprocessnode X)
 void jobscmd(char* command)
 {
     int flagR = 0, flagS = 0; 
-    char *token = strtok(command, " \t");
-    token = strtok(NULL, " \t");
+    char* temp;
+    char *token = strtok_r(command, " \t", &temp);
+    token = strtok_r(NULL, " \t", &temp);
     if(token == NULL){flagS = 1;flagR = 1;}
     else if(strcmp(token,"-r") == 0){flagR = 1;}
     else if(strcmp(token,"-s") == 0){flagS = 1;}
@@ -27,6 +28,7 @@ void jobscmd(char* command)
 
 void addjob(char* command, int pid, char status)
 {
+    char* temp;
     Ptrprocessnode P = InitProcessNode();
     Ptrprocessnode Q = header;
     while(Q->next != NULL && strcmp(command,Q->processcommand) > 0)
@@ -35,7 +37,7 @@ void addjob(char* command, int pid, char status)
     }
     P->jobno = ++jobIndex;
     strcpy(P->processcommand,command);
-    char* token = strtok(command, " \t");
+    char* token = strtok_r(command, " \t", &temp);
     strcpy(P->processname,token);
     P->pid = pid;
     P->status = status;

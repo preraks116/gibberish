@@ -5,17 +5,18 @@ int historyIndex = 0;
 void historyget()
 {
     char homePath[MAX];
+    char* temp;
     strcpy(homePath,home);
     strcat(homePath,"/history.txt");
     FILE* file = fopen(homePath, "r"); 
     char buffer[MAX];
     fgets(buffer, sizeof(buffer), file);
-    char* token = strtok(buffer, "@");
-    token = strtok(NULL, "@");
+    char* token = strtok_r(buffer, "@", &temp);
+    token = strtok_r(NULL, "@", &temp);
     for(;token != NULL; historyIndex++)
     {
         strcpy(history[historyIndex],token);
-        token = strtok(NULL, "@");
+        token = strtok_r(NULL, "@", &temp);
     }
 
 }
@@ -47,10 +48,11 @@ void historylog(char* command)
 
 void historycmd(char* command)
 {
-    char* token = strtok(command, " \t");
-    token = strtok(NULL, " \t");
+    char* temp;
+    char* token = strtok_r(command, " \t", &temp);
+    token = strtok_r(NULL, " \t", &temp);
     int x = historyIndex;
-    char* token2 = strtok(NULL, " \t");
+    char* token2 = strtok_r(NULL, " \t", &temp);
     if(token2 != NULL)
     {
         printf("error: too many arguments\n");

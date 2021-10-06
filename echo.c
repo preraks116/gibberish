@@ -3,12 +3,13 @@
 void echocmd(char* command)
 {
     // printf("command: %s\n",command);
-    char* token = strtok(command, " \t");
-    token = strtok(NULL, " \t");
+    char* temp;
+    char* token = strtok_r(command, " \t", &temp);
+    token = strtok_r(NULL, " \t",&temp);
     while (token != NULL) // prints every token
     {
         printf("%s ", token);
-        token = strtok(NULL, " \t");
+        token = strtok_r(NULL, " \t", &temp);
     }
     printf("\n");
 }

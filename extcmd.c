@@ -25,6 +25,7 @@ Ptrprocessnode InitProcessNode()
 char getstatus(int curpid)
 {
     char pid[MAX];
+    char* temp;
     sprintf(pid,"%d",curpid);
     char procstat[MAX] = "/proc/";
     char buffer[MAX];
@@ -40,9 +41,9 @@ char getstatus(int curpid)
     {
         read(fd, buffer, MAX);
         close(fd);
-        char* token = strtok(buffer, " \t");
-        token = strtok(NULL, " \t");
-        token = strtok(NULL, " \t");
+        char* token = strtok_r(buffer, " \t", &temp);
+        token = strtok_r(NULL, " \t", &temp);
+        token = strtok_r(NULL, " \t", &temp);
         status = token[0];
     }
     return status;
@@ -51,10 +52,11 @@ char getstatus(int curpid)
 void extcmd(char* command)
 {
     int bg = 0;
+    char* temp;
     char commandcopy[MAX];
     strcpy(commandcopy,command);
     if(strchr(command,'&')){bg = 1;}
-    char* token = strtok(command, " \t");
+    char* token = strtok_r(command, " \t", &temp);
     char* args[MAX] = {NULL};
     char com[MAX];
     strcpy(com,token);
@@ -68,7 +70,7 @@ void extcmd(char* command)
         }
         i++;
         
-        token = strtok(NULL, " \t");
+        token = strtok_r(NULL, " \t", &temp);
     }
     if(strcmp(args[i-1],"") == 0){args[i-1] = NULL;}
     int forkReturn = fork();

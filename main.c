@@ -20,17 +20,17 @@
 
 void getcommand(char* command)
 {
+    char* temp;
     if(strcmp(command,"@") == 0){return;}
-    else if(strchr(command,'>') || strchr(command,'<')){inputredircmd(command);}
     else if(strchr(command,';'))
     {
         char allcomms[MAX][MAX];
         int i = 0;
-        char* splitcom = strtok(command, ";\n");
+        char* splitcom = strtok_r(command, ";\n", &temp);
         while (splitcom != NULL) 
         {
             strcpy(allcomms[i],splitcom);
-            splitcom = strtok(NULL, ";");
+            splitcom = strtok_r(NULL, ";", &temp);
             i++;
         }
         for(int j = 0; j < i; j++)
@@ -38,11 +38,12 @@ void getcommand(char* command)
             getcommand(allcomms[j]);
         }
     }
+    else if(strchr(command,'>') || strchr(command,'<')){inputredircmd(command);}
     else
     {
         char args[MAX];
         strcpy(args,command);
-        char* token = strtok(args, " \t");
+        char* token = strtok_r(args, " \t", &temp);
         if(strcmp(token,"pwd") == 0){ pwdcmd(); }
         else if(strcmp(token,"exit") == 0 || strcmp(token,"logout") == 0) {exit(EXIT_SUCCESS);}
         else if(strcmp(token,"echo") == 0) {echocmd(command);}
