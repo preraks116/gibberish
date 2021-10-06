@@ -26,6 +26,19 @@ void redirect_output(char *filename)
     close(fd);
 }
 
+void redirect_output_append(char *filename)
+{
+    int fd;
+    fd = open(filename, O_WRONLY | O_APPEND, 0644);
+    if (fd == -1)
+    {
+        printf("Error opening file %s\n",filename);
+        exit(1);
+    }
+    dup2(fd, 1); //redirect stdout to file
+    close(fd);
+}
+
 void redirect_io(char *filename)
 {
     int fd;
@@ -80,6 +93,12 @@ void inputredircmd(char *command)
         {
             filename = args[argindex + 1];
             redirect_input(filename);
+            argindex++;
+        }
+        else if(strcmp(args[argindex], ">>") == 0)
+        {
+            filename = args[argindex + 1];
+            redirect_output_append(filename);
             argindex++;
         }
         else
