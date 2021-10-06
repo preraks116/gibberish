@@ -33,6 +33,8 @@ char home[MAX];
 char command[MAX];
 int fd;
 int shellpid;
+int storage_in;
+int storage_out;
 void die(const char *s);
 void disableRawMode();
 void enableRawMode();

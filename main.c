@@ -141,6 +141,8 @@ int main()
         historylog(command);
         historysave();
         printf("\n");
+        storage_in = dup(0);
+        storage_out = dup(1);
         getcommand(command);
     }
 }
