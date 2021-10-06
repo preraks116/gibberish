@@ -2,10 +2,11 @@
 
 void baywatchcmd(char *command)
 {
-    char *token = strtok(command, " \t");
+    char* temp;
+    char *token = strtok_r(command, " \t", &temp);
     // printf("token:%s\n",token);
-    token = strtok(NULL, " \t");
-    char temp[MAX] = "";
+    token = strtok_r(NULL, " \t", &temp);
+    // char temp[MAX] = "";
     int interval = 1;
     int i = 0;
     int p = 0, q = 0, r = 0;
@@ -13,7 +14,7 @@ void baywatchcmd(char *command)
     {
         if (strcmp(token, "-n") == 0)
         {
-            token = strtok(NULL, " \t");
+            token = strtok_r(NULL, " \t", &temp);
             if (token == NULL)
             {
                 printf("error: no command given\n");
@@ -22,7 +23,7 @@ void baywatchcmd(char *command)
             else
             {
                 interval = atoi(token);
-                token = strtok(NULL, " \t");
+                token = strtok_r(NULL, " \t", &temp);
             }
         }
         else
@@ -30,7 +31,7 @@ void baywatchcmd(char *command)
             if (strcmp(token,"interrupt") == 0){p = 1;}
             else if (strcmp(token,"newborn") == 0){q = 1;}
             else if (strcmp(token,"dirty") == 0){r = 1;}
-            token = strtok(NULL, " \t");
+            token = strtok_r(NULL, " \t", &temp);
         }
     }
     if(p+q+r<1){printf("error: too few arguments");return;}
