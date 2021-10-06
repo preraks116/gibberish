@@ -59,3 +59,7 @@ void removejob(int pid);
 void ctrlZhandler();
 void ctrlChandler();
 void redirect_output(char *filename);
+void reset_stdio();
+void redirect_input(char *filename);
+void redirect_input_append(char *filename);
+void redirect_output_append(char *filename);

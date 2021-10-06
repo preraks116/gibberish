@@ -19,10 +19,7 @@ void bgcmd(char* command)
             if(kill(Q->pid, SIGCONT) == 0)
             {
                 Q->status = 'R';
-                setpgid(Q->pid, 0);
-                signal(SIGTTOU, SIG_IGN);
-                tcsetpgrp(0, Q->pid);
-                printf("Process %d is now in the background\n", Q->pid);
+                printf("Process %d is now running in the background\n", Q->pid);
                 return;
             }
             else

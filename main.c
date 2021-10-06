@@ -17,6 +17,7 @@
 #include "bg.c"
 #include "baywatch.c"
 #include "inputredir.c"
+#include "pipe.c"
 
 void getcommand(char* command)
 {
@@ -39,6 +40,7 @@ void getcommand(char* command)
         }
     }
     else if(strchr(command,'>') || strchr(command,'<')){inputredircmd(command);}
+    else if(strchr(command,'|')){pipecmd(command);}
     else
     {
         char args[MAX];
