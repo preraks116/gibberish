@@ -58,3 +58,4 @@ void addjob(char* command, int pid, char status);
 void removejob(int pid);
 void ctrlZhandler();
 void ctrlChandler();
+void redirect_output(char *filename);

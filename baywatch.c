@@ -37,31 +37,27 @@ void baywatchcmd(char *command)
     else if(p+q+r>1){printf("error: too many arguments");return;}
     else
     {
-        // printing till q is pressed
-        
-        while(1)
+
+        int curpid = fork();
+        if(curpid == 0)
         {
-            printf("hi\n");
-            sleep(1);
-            if(getchar()=='q')
+            while(1)
             {
-                break;
+                printf("hi\n");
+                sleep(interval);
             }
         }
-        
-
-        // while(1)
-        // {
-        //     // printf("%s\n",output);
-        //     sleep(1);
-        //     // char response = waitForCharInput(1);
-        //     // if(response == 'q'){break;}
-        //     // if(i != 0 && i % interval == 0)
-        //     // {
-        //     //     printf("%d %d %d\n",p,q,r);
-        //     // }
-        //     printf("%d %d %d\n",p,q,r);
-        // }
-
+        else
+        {
+            
+            char c;
+            setbuf(stdout, NULL);
+            enableRawMode();
+            while(read(STDIN_FILENO, &c, 1) == 1)
+            {
+                if(c == 'q'){kill(curpid,SIGTERM);break;}
+            }
+            disableRawMode();
+        }
     }
 }

@@ -4,7 +4,7 @@ void finishbg()
 {
     Ptrprocessnode Q = header;
     int curpid = 0, r;
-    char processname[MAX];
+    char processname[MAX] = {'\0'};
     while ((curpid = waitpid(-1, &r, WNOHANG | WUNTRACED)) > 0)
     {
         while (Q->next != NULL)
@@ -17,6 +17,7 @@ void finishbg()
                 break;
             }
         }
+        if(processname[0] == '\0'){return;}
         if(curpid)
         {
             printf("\n%s with pid %d ",processname,curpid);
