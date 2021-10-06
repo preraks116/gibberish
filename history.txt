@@ -1,1 +1,0 @@
-cd .. @ls @cat z.txt @cat b.txt @cat < b.txt >> z.txt @cat z.txt
