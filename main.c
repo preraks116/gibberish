@@ -16,14 +16,13 @@
 #include "fg.c"
 #include "bg.c"
 #include "baywatch.c"
+#include "inputredir.c"
 
 void getcommand(char* command)
 {
-    if(strcmp(command,"@") == 0)
-    {
-        return;
-    }
-    if(strchr(command,';'))
+    if(strcmp(command,"@") == 0){return;}
+    else if(strchr(command,'>') || strchr(command,'<')){inputredircmd(command);}
+    else if(strchr(command,';'))
     {
         char allcomms[MAX][MAX];
         int i = 0;

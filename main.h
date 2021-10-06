@@ -16,7 +16,6 @@
 #include <fcntl.h>
 #include <termios.h>
 #include <ctype.h>
-#include <conio.h>
 
 #define MAX (int)1e3+5
 
