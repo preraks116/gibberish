@@ -40,17 +40,25 @@ void dirtycmd()
 
 void newborncmd()
 {
-    printf("psy\n");
+    char path[MAX] = "/proc/loadavg";
+    FILE* fp = fopen(path, "r");
+    char* temp;
+    char *store = NULL;
+    size_t len = 0;
+    getline(&store, &len, fp);
+    // printf("%s\n",store);
+    fclose(fp);
+    char* token = strtok_r(store, " \t", &temp);
+    for(int i = 0; i < 4; i++){token = strtok_r(NULL, " \t", &temp);}
+    printf("%s", token);
 }
 
 void baywatchcmd(char *command)
 {
     char *temp;
     char *token = strtok_r(command, " \t", &temp);
-    // printf("token:%s\n",token);
     token = strtok_r(NULL, " \t", &temp);
     void (*func)();
-    // char temp[MAX] = "";
     int interval = 1;
     int i = 0;
     int p = 0, q = 0, r = 0;
@@ -72,43 +80,17 @@ void baywatchcmd(char *command)
         }
         else
         {
-            if (strcmp(token, "interrupt") == 0)
-            {
-                p = 1;
-                func = &interruptcmd;
-                printf("CPU0\tCPU1\tCPU2\tCPU3\tCPU4\tCPU5\tCPU6\tCPU7\n");
-            }
-            else if (strcmp(token, "newborn") == 0)
-            {
-                q = 1;
-                func = &newborncmd;
-            }
-            else if (strcmp(token, "dirty") == 0)
-            {
-                r = 1;
-                func = &dirtycmd;
-            }
-            else
-            {
-                printf("error: invalid command\n");
-                return;
-            }
+            if (strcmp(token, "interrupt") == 0){p = 1;func = &interruptcmd;printf("CPU0\tCPU1\tCPU2\tCPU3\tCPU4\tCPU5\tCPU6\tCPU7\n");}
+            else if (strcmp(token, "newborn") == 0){q = 1;func = &newborncmd;}
+            else if (strcmp(token, "dirty") == 0){r = 1;func = &dirtycmd;}
+            else{printf("error: invalid command\n");return;}
             token = strtok_r(NULL, " \t", &temp);
         }
     }
-    if (p + q + r < 1)
-    {
-        printf("error: too few arguments");
-        return;
-    }
-    else if (p + q + r > 1)
-    {
-        printf("error: too many arguments");
-        return;
-    }
+    if (p + q + r < 1){printf("error: too few arguments");return;}
+    else if (p + q + r > 1){printf("error: too many arguments");return;}
     else
     {
-
         int curpid = fork();
         if (curpid == 0)
         {
