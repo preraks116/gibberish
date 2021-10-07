@@ -107,6 +107,7 @@ void inputredircmd(char *command)
             strcat(finalcom, args[argindex]);
         }
     }
+    // printf("%s\n", finalcom);
     getcommand(finalcom);
     reset_stdio();
 }

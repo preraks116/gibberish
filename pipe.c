@@ -35,12 +35,14 @@ void pipecmd(char* command)
     while (token != NULL)
     {
         strcpy(args[argno], token);
+        // printf("%s\n", args[argno]);
         argno++;
         token = strtok_r(NULL, "|", &temp); 
     }
     int ** pipearray = (int **) malloc((argno - 1) * sizeof(int *));
     for(int i = 0; i < argno - 1; i++){pipearray[i] = (int *) malloc(2 * sizeof(int));}
     int r = pipe_create(pipearray[0]);if(r < 0){return;}
+    int fd = dup(1);
     dup2(pipearray[0][1], 1);
     getcommand(args[0]);
     close(pipearray[0][1]);
@@ -55,7 +57,7 @@ void pipecmd(char* command)
         free(pipearray[i-1]);
     }
     dup2(pipearray[argno-2][0], 0);
-    dup2(storage_out, 1);
+    dup2(fd, 1);
     getcommand(args[argno - 1]);
     close(pipearray[argno-2][0]);
     free(pipearray[argno-2]);
