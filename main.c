@@ -71,7 +71,7 @@ int main()
     getcwd(home,MAX);
     historyget();
     shellpid = tcgetpgrp(0);
-    printf("shellpid:%d\n",shellpid);
+    // printf("shellpid:%d\n",shellpid);
     header = InitProcessNode();
     while (1) 
     {

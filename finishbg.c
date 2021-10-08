@@ -21,9 +21,9 @@ void finishbg()
         if(curpid)
         {
             printf("\n%s with pid %d ",processname,curpid);
-            if (__WIFEXITED(r)){printf("exited normally\n");}
+            if (__WIFEXITED(r)){printf("exited normally\n");removejob(curpid);if(jobIndex > 0){jobIndex--;}}
             else if (__WIFSTOPPED(r)){printf("suspended normally\n");}
-            else{printf("exited abnormally\n");}
+            else{printf("exited abnormally\n");removejob(curpid);if(jobIndex > 0){jobIndex--;}}
             prompt();
             if(strcmp(command,"@") != 0)
             {

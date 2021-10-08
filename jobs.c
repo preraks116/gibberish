@@ -18,10 +18,19 @@ void jobscmd(char* command)
     else if(strcmp(token,"-r") == 0){flagR = 1;}
     else if(strcmp(token,"-s") == 0){flagS = 1;}
     Ptrprocessnode X = header->next;
+    char status;
     while(X != NULL)
     {
-        if(flagR == 1 && X->status == 'R'){printjobs("Running",X);}
-        else if(flagS == 1 && X->status == 'S'){printjobs("Stopped",X);}
+        status = getstatus(X->pid);
+        if(flagR == 1)
+        {
+            
+            if(status != 'T'){printjobs("Running",X);}
+        } 
+        if(flagS == 1)
+        {
+            if(status == 'T'){printjobs("Stopped",X);}
+        } 
         X = X->next;
     }
 }
@@ -41,6 +50,7 @@ void addjob(char* command, int pid, char status)
     strcpy(P->processname,token);
     P->pid = pid;
     P->status = status;
+    // P->status = getstatus(pid);
     P->next = Q->next;
     Q->next = P;
 }

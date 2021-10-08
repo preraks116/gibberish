@@ -25,7 +25,7 @@ void fgcmd(char* command)
                 waitpid(Q->pid, &status, WUNTRACED);
                 if(!WIFSTOPPED(status)){removejob(Q->pid);}
                 tcsetpgrp(0, getpgrp());
-                printf("Process %d is now in the foreground\n", Q->pid);
+                // printf("Process %d is now in the foreground\n", Q->pid);
                 signal(SIGTTOU, SIG_DFL);
                 return;
             }

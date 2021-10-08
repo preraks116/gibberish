@@ -80,7 +80,8 @@ void extcmd(char* command)
         return;
     }
     
-
+    addjob(commandcopy,forkReturn,'R');
+    // printf("%c\n",getstatus(forkReturn));
     if(forkReturn == 0)
     {
         setpgid(0, 0);
@@ -100,12 +101,13 @@ void extcmd(char* command)
             signal(SIGTTOU, SIG_IGN);
             tcsetpgrp(0, forkReturn);
             waitpid(forkReturn,&r,WUNTRACED);
+            removejob(forkReturn);
             tcsetpgrp(0, getpgrp());
             signal(SIGTTOU, SIG_DFL);
         }
         else
         {
-            addjob(commandcopy,forkReturn,'R');
+            // addjob(commandcopy,forkReturn,'R');
             printf("%d\n",forkReturn);
         }
     }
