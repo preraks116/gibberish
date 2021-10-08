@@ -24,7 +24,7 @@ struct termios orig_termios;
 typedef struct processNode processnode;
 typedef struct processNode * Ptrprocessnode;
 
-
+Ptrprocessnode InitProcessNode();
 
 Ptrprocessnode header;
 char history[20][MAX];
@@ -65,3 +65,19 @@ void redirect_input(char *filename);
 void redirect_input_append(char *filename);
 void redirect_output_append(char *filename);
 char getstatus(int curpid);
+void sigcmd(char* command);
+void fgcmd(char* command);
+void bgcmd(char* command);
+void pipecmd(char* command);
+int pipe_close(int *pipefd);
+int pipe_create(int *pipefd);
+void redirect_io(char *filename);
+void inputredircmd(char *command);
+void interruptcmd();
+void dirtycmd();
+void newborncmd();
+void baywatchcmd(char *command);
+void replaycmd(char* command);
+void printjobs(char* status,Ptrprocessnode X);
+void jobscmd(char* command);
+void addjob(char* command, int pid, char status);
