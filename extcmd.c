@@ -2,6 +2,7 @@
 
 
 int jobIndex = 0;
+int fgpid;
 
 struct processNode
 {
@@ -52,6 +53,7 @@ char getstatus(int curpid)
 void extcmd(char* command)
 {
     int bg = 0;
+    fgpid = 0;
     char* temp;
     char commandcopy[MAX];
     strcpy(commandcopy,command);
@@ -97,11 +99,14 @@ void extcmd(char* command)
         int r = 0;
         if(bg == 0)
         {
+            signal(SIGTSTP, ctrlZhandler);
+            fgpid = forkReturn;
             setpgid(forkReturn,0);
             signal(SIGTTOU, SIG_IGN);
             tcsetpgrp(0, forkReturn);
             waitpid(forkReturn,&r,WUNTRACED);
             removejob(forkReturn);
+            fgpid = 0;
             tcsetpgrp(0, getpgrp());
             signal(SIGTTOU, SIG_DFL);
         }

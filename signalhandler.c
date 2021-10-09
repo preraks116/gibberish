@@ -8,19 +8,30 @@ void ctrlChandler()
 
 void ctrlZhandler() //doesnt work
 {
-    int curpid = tcgetpgrp(0);
-    // printf("%d\n",curpid);
-    // printf("%d\n",shellpid);
-    if(curpid == shellpid)
+    // int curpid = tcgetpgrp(0);
+    // // printf("%d\n",curpid);
+    // // printf("%d\n",shellpid);
+    // if(curpid == shellpid)
+    // {
+    //     return;
+    // }
+    // printf("hi\n");
+    // kill(curpid, SIGTSTP);
+    // printf("%s\n",command);
+    // addjob(command,curpid,'S');
+    // printf("\n");
+    // prompt();
+    if(fgpid == 0)
     {
         return;
     }
-    printf("hi\n");
-    kill(curpid, SIGTSTP);
-    printf("%s\n",command);
-    addjob(command,curpid,'S');
-    printf("\n");
-    prompt();
+    else{
+        printf("\n%d\n",fgpid);
+        // addjob(command,fgpid,'S');
+        printf("\n");
+        prompt();
+    }
+    
 }
 
 void ctrlDhandler(int pt)

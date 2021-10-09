@@ -36,6 +36,7 @@ int shellpid;
 int storage_in;
 int storage_out;
 int jobIndex;
+int fgpid;
 void die(const char *s);
 void disableRawMode();
 void enableRawMode();

@@ -69,6 +69,8 @@ int main()
 {
     char c;
     getcwd(home,MAX);
+    //make a txt file called history.txt
+    FILE* fp = fopen("history.txt","a");
     historyget();
     shellpid = tcgetpgrp(0);
     // printf("shellpid:%d\n",shellpid);
